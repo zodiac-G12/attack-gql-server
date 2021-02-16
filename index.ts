@@ -12,19 +12,10 @@ const qc = queryComplexity({
   onComplete: (complexity: number) => {console.log('Query Complexity:', complexity);},
 })
 
-    // queryComplexity({
-    //   estimators: [
-    //     // Configure your estimators
-    //     simpleEstimator({defaultComplexity: 1})
-    //   ],
-    //   maximumComplexity: 1000,
-    //   onComplete: (complexity) => {console.log('Query Complexity:', complexity);},
-    // })
-
 const ca = costAnalysis({
   defaultCost: 1,
   maximumCost: 10,
-  onComplete: (complexity: number) => {console.log('Query Complexity:', complexity);},
+  onComplete: (cost: number) => {console.log('Query Cost:', cost);},
 });
 
 
@@ -131,54 +122,6 @@ const findbyIdAuthor = (id: number): Author => {
   console.log(dbCount);
   return authors.filter(author => author.id === id)[0];
 }
-
-// const formalizeBook = (book, id) => {
-//   if (!book) throw new Error(`book is not Exist. id = ${id}`);
-//   book.author = findbyIdAuthor(book.author.id);
-//   console.log(dbCount);
-//   return book;
-// }
-//
-// const formalizeAuthor = (author, id) => {
-//   if (!author) throw new Error(`author is not Exist. id = ${id}`);
-//   author.books = author.books.map(aook => {
-//     dbCount++;
-//     const book = findByIdBook(aook.id);
-//     if (!book) throw new Error(`author.books have not Exist book. id = ${aook.id}`);
-//     return book;
-//   });
-//   console.log(dbCount);
-//   return author;
-// }
-
-// Resolvers define the technique for fetching the types defined in the
-// schema. This resolver retrieves books from the "books" array above.
-// const resolvers = {
-//   Query: {
-//     books: () => {
-//       dbCount = 0;
-//       return books.map(book => {
-//         dbCount++;
-//         return formalizeBook(book);
-//       });
-//     },
-//     authors: () => {
-//       dbCount = 0;
-//       return authors.map(author => {
-//         dbCount++;
-//         return formalizeAuthor(author);
-//       });
-//     },
-//     book: (_, params) => {
-//       dbCount = 0;
-//       return formalizeBook(findByIdBook(parseInt(params.id)), params.id);
-//     },
-//     author: (_, params) => {
-//       dbCount = 0;
-//       return formalizeAuthor(findbyIdAuthor(parseInt(params.id)), params.id);
-//     },
-//   },
-// };
 
 // SelectionSet: https://www.apollographql.com/blog/the-anatomy-of-a-graphql-query-6dffa9e9e747/
 
