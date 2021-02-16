@@ -8,7 +8,7 @@ export const complexityCal = (selectionSet: any): number => {
   return selectionCount(selectionSet);
 }
 
-// DISABLE disallowCycle -> INVALID: author -> books -> shops -> authors -> books -> shops
+// DISABLE disallowCycle -> INVALID: author -> books -> (shops -> authors -> shops) -> books
 // DISABLE disallowPattern -> INVALID: author -> books -> (shops -> countries) -> authors -> shops -> books -> (shops -> countries)
 const loopCheck = (beforeName, selectionSet, transitionReference, disallowCycle, disallowPattern) => {
   if (!selectionSet) {
@@ -29,7 +29,7 @@ const loopCheck = (beforeName, selectionSet, transitionReference, disallowCycle,
 
   const nextName = selectionSet.selections[0].selectionSet?.selections[0].name.value;
 
-  console.log(beforeName, nowName, nextName, selectionSet.selections[0])
+  // console.log(beforeName, nowName, nextName, selectionSet.selections[0])
   if (disallowCycle && beforeName === nextName) {
     throw new Error(`This is Looped Evil Query: beforeName: ${beforeName}, nowName: ${nowName}, nextName: ${nextName}`);
   }

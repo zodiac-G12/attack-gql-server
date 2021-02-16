@@ -24,17 +24,16 @@ const findByIdAuthor = (id: number): Author => {
 const resolvers = {
   Query: {
     books (parent, args, context, info) {
-      orginalRules(info, true, true);
+      orginalRules(info, false, true);
       return books;
     },
     authors (parent, args, context, info) {
-      orginalRules(info, true, true);
+      orginalRules(info, false, true);
       return authors;
     },
   },
   Book: {
     author (parent, args, context, info) {
-      orginalRules(info, true, true);
       // console.log(parent, args, context, info);
       //const complexity = complexityCal(info.fieldNodes[0].selectionSet);
 
@@ -46,7 +45,6 @@ const resolvers = {
   },
   Author: {
     books (parent, args, context, info) {
-      orginalRules(info, true, true);
       //const complexity = complexityCal(info.fieldNodes[0].selectionSet);
       //console.log(`complexity: ${complexity}`);
 
@@ -63,7 +61,7 @@ const server = new ApolloServer({
   resolvers,
   validationRules: [
     // depthLimiter(11),
-    depthLimiter(11),
+    depthLimiter(9),
     queryComplexier(10),
     costAnalyzer(10),
   ],
